@@ -14,7 +14,7 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 app.use(express.static('public'));
 
-// HTML Routes
+// HTML ROUTES
 app.get('/notes', function(req,res) {
     res.sendFile(path.join(__dirname, './public/notes.html'));
 });
@@ -24,7 +24,13 @@ app.get('/', function(req,res) {
 });
 
 
-
+// API ROUTES
+// THIS READS AND RETRIEVES ALL STORED NOTES IN THE DATABASE
+app.get('/api/notes', (req,res) => {
+    console.log(notes);
+    res.json(notes);
+    res.end();
+});
 
 
 //SERVER LISTEN
