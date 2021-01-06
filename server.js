@@ -3,7 +3,9 @@ const express = require("express");
 const path = require("path");
 const fs = require("fs");
 const uuidv1 = require('uuidv1')
+const util = require('util');
 const notes = JSON.parse(fs.readFileSync('./db/db.json'));
+const writeFileAsync = util.promisify(fs.writeFile);
 
 
 var app = express();
@@ -22,6 +24,10 @@ app.get('/notes', function(req,res) {
 // THIS DISPLAYS THE MAIN PAGE TO THE SERVER
 app.get('/', function(req,res) {
     res.sendFile(path.join(__dirname, './public/index.html'));
+});
+// THIS CATCHES ALL 404 ERRORS
+app.get("*", function (req, res) {
+    res.sendFile(path.join(__dirname, "/public/index.html"));
 });
 
 
@@ -48,7 +54,6 @@ app.post('/api/notes', (req,res) => {
 // THIS SEARCHES FOR A STORED NOTE BY ID AND DELETES IT
 app.delete('/api/notes/:id', (req,res) => {
     const id = req.params.id;
-    console.log(id, notes);
     const note = notes.filter(function(noteObject) {
         return noteObject.id !== id;
     });
