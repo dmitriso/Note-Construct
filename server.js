@@ -48,6 +48,7 @@ app.post('/api/notes', (req,res) => {
 // THIS SEARCHES FOR A STORED NOTE BY ID AND DELETES IT
 app.delete('/api/notes/:id', (req,res) => {
     const id = req.params.id;
+    console.log(id, notes);
     const note = notes.filter(function(noteObject) {
         return noteObject.id !== id;
     });
