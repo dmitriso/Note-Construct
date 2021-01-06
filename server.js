@@ -45,7 +45,7 @@ app.delete("/api/notes/:id", function (req, res) {
     const newNotes = notes.filter(function (noteObj) {
         return noteObj.id !== req.params.id;
     });
-    fs.writeFileSync("db/db.json", JSON.stringify(newNotes));
+    fs.writeFileSync("db/db.json", JSON.stringify(notes));
     res.json(notes);
 });
 
