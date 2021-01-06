@@ -26,9 +26,9 @@ app.get('/', function(req,res) {
     res.sendFile(path.join(__dirname, './public/index.html'));
 });
 // THIS CATCHES ALL 404 ERRORS
-app.get("*", function (req, res) {
-    res.sendFile(path.join(__dirname, "/public/index.html"));
-});
+// app.get("*", function (req, res) {
+//     res.sendFile(path.join(__dirname, "/public/index.html"));
+// });
 
 
 // API ROUTES
