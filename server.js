@@ -1,13 +1,9 @@
 //VARIABLES AND REQUIRED MODULES
 const express = require("express");
-const path = require("path");
+const { v1: uuidv1 } = require('uuid');
 const fs = require("fs");
-const uuidv1 = require('uuidv1');
-const util = require('util');
-const notes = JSON.parse(fs.readFileSync('./db/db.json'));
-const writeFileAsync = util.promisify(fs.writeFile);
-const readFileAsync = util.promisify(fs.readFile);
-
+const path = require("path");
+const notes = JSON.parse(fs.readFileSync("db/db.json"))
 
 var app = express();
 var PORT = process.env.PORT || 3000;
@@ -17,23 +13,17 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 app.use(express.static('public'));
 
-// HTML ROUTES
-// THIS DISPLAYS THE NOTE TAKING INTERFACE TO THE SERVER
-app.get('/notes', function(req,res) {
-    res.sendFile(path.join(__dirname, './public/notes.html'));
-});
-// THIS DISPLAYS THE MAIN PAGE TO THE SERVER
-app.get('/', function(req,res) {
-    res.sendFile(path.join(__dirname, './public/index.html'));
-});
-
-
+//SERVER LISTEN
+app.listen(PORT, function() {
+    console.log("App listening on PORT " + PORT);
+  });
 
 // API ROUTES
 // THIS READS AND RETRIEVES ALL STORED NOTES IN THE DATABASE
-app.get('/api/notes', (req,res) => {
-    res.json(notes);
-    res.end();
+app.get("/api/notes", (req, res) => {
+    const noteBody = JSON.parse(fs.readFileSync("db/db.json"))
+    res.json(noteBody)
+    console.log(noteBody);
 });
 
 // THIS CREATES A NEW NOTE FROM THE REQUEST AND WRITES IT TO A JSON FILE
@@ -48,11 +38,6 @@ app.post('/api/notes', (req,res) => {
     res.end();
 });
 
-app.post("/api/notes", function (req, res) {
-    notesdb.push(req.body)
-    res.json(true);
-});
-
 // THIS SEARCHES FOR A STORED NOTE BY ID AND DELETES IT
 app.delete("/api/notes/:id", function (req, res) {
     const noteData = JSON.parse(fs.readFileSync("db/db.json"));
@@ -63,9 +48,16 @@ app.delete("/api/notes/:id", function (req, res) {
     res.json(newNotes);
 });
 
-
-
-//SERVER LISTEN
-app.listen(PORT, function() {
-    console.log("App listening on PORT " + PORT);
-  });
+// HTML ROUTES
+// THIS DISPLAYS THE NOTE TAKING INTERFACE TO THE SERVER
+app.get('/notes', function(req,res) {
+    res.sendFile(path.join(__dirname, './public/notes.html'));
+});
+// THIS DISPLAYS THE MAIN PAGE TO THE SERVER
+app.get('/', function(req,res) {
+    res.sendFile(path.join(__dirname, './public/index.html'));
+});
+// THIS CATCHES ALL 404 ERRORS
+app.get("*", function (req, res) {
+    res.sendFile(path.join(__dirname, "/public/index.html"));
+});
