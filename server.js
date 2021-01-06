@@ -31,7 +31,17 @@ app.get('/api/notes', (req,res) => {
     res.json(notes);
     res.end();
 });
-
+// THIS CREATES A NEW NOTE FROM THE REQUEST AND WRITES IT TO A JSON FILE
+// EACH NOTE IS GIVEN A SPECIFIC ID WHEN IT IS CREATED
+app.post('/api/notes', (req,res) => {
+    const newNote = req.body;
+    newNote.id = uuidv1();
+    notes.push(newNote);
+    fs.writeFileSync('./db/db.json', JSON.stringify(notes));
+    console.log(notes);
+    res.json(notes);
+    res.end();
+});
 
 //SERVER LISTEN
 app.listen(PORT, function() {
