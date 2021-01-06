@@ -13,6 +13,7 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 app.use(express.static('public'));
 
+
 //SERVER LISTEN
 app.listen(PORT, function() {
     console.log("App listening on PORT " + PORT);
@@ -40,12 +41,12 @@ app.post('/api/notes', (req,res) => {
 
 // THIS SEARCHES FOR A STORED NOTE BY ID AND DELETES IT
 app.delete("/api/notes/:id", function (req, res) {
-    const noteData = JSON.parse(fs.readFileSync("db/db.json"));
-    const newNotes = noteData.filter(function (noteObj) {
+    const notes = JSON.parse(fs.readFileSync("db/db.json"));
+    const newNotes = notes.filter(function (noteObj) {
         return noteObj.id !== req.params.id;
     });
     fs.writeFileSync("db/db.json", JSON.stringify(newNotes));
-    res.json(newNotes);
+    res.json(notes);
 });
 
 // HTML ROUTES
