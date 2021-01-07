@@ -5,9 +5,8 @@
 ## Table of Contents
 
 * [Description](##Description)
-* [Installation](##Installation)
 * [Usage](##Usage)
-* [Credits](##Credits)
+* [Technologies](##Technologies)
 * [URL's](##URL's)
 * [License](##License)
 * [Author](##Author)
@@ -22,15 +21,12 @@
 
 ## Usage
 
-<details>
 
-<summary>Usage-Video-Guide</summary>
 
-![Usage-Gif]()
+![Usage-Gif](public\assets\gifs\Note_Taker.gif)
 
-</details>
 
-<p>You must have a Command-Line Application able to take input. You must also install Express and uuidv1, to use this Note-Construct!</p>
+<p>To use this Note-Construct Application navigate to the bottom of this read me and click on the "Deployed-App" link. Once the your browser has loaded the app it is ready to use! To start taking notes simply click the "Get Started" button. You will be brought to the notes page. Type a note title of your choosing and any note or task into the text field. If a note title and body have been entered a save button will display on the top right corner of the page. Once clicked this button will save your new note to the database. Your new note will then be displayed in the notes history column to the left. The saved notes will persist upon refreshing the app. Each saved note that is displayed may be deleted by clicking on its trash can button!</p>
 
 <br>
 
@@ -52,7 +48,7 @@
 
 * [Deployed-App](https://infinite-anchorage-29717.herokuapp.com/)
 * [GitHub-Repository](https://github.com/dmitriso/Note-Construct)
-* [Video-Guide]()
+* [Video-Guide](https://www.youtube.com/watch?v=wpZAKLDgK1U&feature=youtu.be)
 
 <br>
 
